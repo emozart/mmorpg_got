@@ -1,9 +1,9 @@
 module.exports.home = function(application, req, res){
-    res.render('index');
+    res.render('index', {validacao: {}});
 }
 
 module.exports.autenticar = function(application, req, res){
-    dodosForm = req.body;
+    dadosForm = req.body;
 
     req.assert('usuario', 'Usuário é obrigatório.').notEmpty();
     req.assert('senha', 'Usuário é obrigatório.').notEmpty();
@@ -15,5 +15,8 @@ module.exports.autenticar = function(application, req, res){
         return;
     }
 
-    res.send('Tudo Ok para iniciar a sessão.');
+    var UsuariosDAO = new application.app.models.UsuariosDAO('mongodb://localhost:27017', 'got');
+    UsuariosDAO.autenticar(dadosForm, req, res);
+
+    //res.send('Tudo Ok para iniciar a sessão.');
 }
