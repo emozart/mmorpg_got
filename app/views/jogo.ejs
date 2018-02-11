@@ -7,6 +7,13 @@
 		
 		<!-- JQuery -->
 		<script src="js/jquery-2.2.1.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('#brn-sair').click(function(){
+					window.location.href = '/sair';
+				})
+			})
+		</script>
 
 		<!-- bootstrap - link cdn -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -21,7 +28,7 @@
 		<nav class="navbar navbar-default navbar-static-top">
 			<div class="container">
 				<div class="form-group sair">
-					<button type="button" class="btn btn-info pull-right">Sair</button>
+					<button type="button" class="btn btn-info pull-right" id="brn-sair">Sair</button>
 				</div>
 			</div>
 		</nav>
