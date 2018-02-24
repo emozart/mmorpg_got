@@ -15,7 +15,7 @@ module.exports.autenticar = function(application, req, res){
         return;
     }
 
-    var UsuariosDAO = new application.app.models.UsuariosDAO('mongodb://localhost:27017', 'got');
+    var UsuariosDAO = new application.app.models.UsuariosDAO();
     UsuariosDAO.autenticar(dadosForm, req, res);
 
     //res.send('Tudo Ok para iniciar a sessão.');

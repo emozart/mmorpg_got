@@ -17,8 +17,11 @@ module.exports.cadastrar = function(application, req, res){
         return;
     }
 
-    var UsuariosDAO = new application.app.models.UsuariosDAO('mongodb://localhost:27017', 'got');
+    var UsuariosDAO = new application.app.models.UsuariosDAO();
     UsuariosDAO.inserirUsuario(dadosForm);
+
+    var JogoDAO = new application.app.models.JogoDAO();
+    JogoDAO.gerarParamentros(dadosForm.usuario);
 
     res.send('Formulário enviado com sucesso!');
 }
