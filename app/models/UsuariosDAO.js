@@ -1,17 +1,14 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
-function UsuariosDAO(url, dbName){
-    this._url = url;
-    this._dbName = dbName;
-}
+function UsuariosDAO(){}
 
 UsuariosDAO.prototype.inserirUsuario = function(usuario){
     
-    MongoClient.connect(this._url, function(err, client) {
+    MongoClient.connect('mongodb://localhost:27017', function(err, client) {
         assert.equal(null, err);
       
-        const db = client.db(this._dbName);
+        const db = client.db('got');
       
         db.collection('usuarios').insertOne(usuario, function(err, r) {
             assert.equal(null, err);
