@@ -25,14 +25,43 @@ JogoDAO.prototype.gerarParamentros = function(usuario){
     }); 
 }
 
-JogoDAO.prototype.iniciaJogo = function(res, usuario, casa, comando_invalido){
+JogoDAO.prototype.iniciaJogo = function(res, usuario, casa, msg){
     MongoClient.connect('mongodb://localhost:27017', function(err, client) {
         assert.equal(null, err);
       
         const db = client.db('got');
       
         db.collection('jogo').find(usuario).toArray(function(err, result){
-            res.render('jogo', {img_casa: casa, jogo: result[0], comando_invalido: comando_invalido});
+            res.render('jogo', {img_casa: casa, jogo: result[0], msg: msg});
+        });
+        
+        client.close();
+    }); 
+}
+
+JogoDAO.prototype.acao = function(acao){
+    MongoClient.connect('mongodb://localhost:27017', function(err, client) {
+        assert.equal(null, err);
+      
+        const db = client.db('got');
+
+        var date = new Date();
+
+        var tempo = null;
+
+        switch(acao.acao){
+            case 1: tempo * 60 * 60000;
+            case 2: tempo * 60 * 60000;
+            case 3: tempo * 60 * 60000;
+            case 4: tempo * 60 * 60000;
+        }
+
+        acao.acao_termina_em = date.getTime() + tempo;
+      
+        db.collection('acao').insertOne(acao, function(err, r) {
+            assert.equal(null, err);
+            assert.equal(1, r.insertedCount);
+            client.close();
         });
         
         client.close();

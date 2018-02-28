@@ -4,9 +4,9 @@ module.exports.jogo = function(application, req, res){
         return;    
     }
 
-    var comando_invalido = 'N';
-    if(req.query.comando_invalido == 'S'){
-        comando_invalido = 'S';
+    var msg = '';
+    if(req.query.comando_invalido != ''){
+        msg = req.query.msg;
     }
 
     var UsuariosDAO = new application.app.models.UsuariosDAO();
@@ -14,7 +14,7 @@ module.exports.jogo = function(application, req, res){
     var usuario = req.session.usuario;
     var casa = req.session.casa;
 
-    JogoDAO.iniciaJogo(res, usuario, casa, comando_invalido);
+    JogoDAO.iniciaJogo(res, usuario, casa, msg);
 }
 
 module.exports.sair = function(application, req, res){
@@ -55,10 +55,12 @@ module.exports.ordenar_acao_sudito = function(application, req, res){
     var erros = req.validationErrors();
 
     if(erros){
-        res.redirect('jogo?comando_invalido=S');
+        res.redirect('jogo?msg=A');
         return;
     }
 
-    console.log(dadosForm);
-    res.send('Tudo Ok!');
+    var JogoDAO = new application.app.models.JogoDAO();
+    dadosForm.usuario = req.session.usuario;
+    JogoDAO.acao(dadosForm);
+    res.redirect('jogo?msg=B');
 }

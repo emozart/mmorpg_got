@@ -14,7 +14,7 @@
 				})
 
 				$('#btnSuditos').click(function(){
-					$('#msg_erro').hide();
+					$('#msg').hide();
 
 					$.ajax({
 						url: '/suditos',
@@ -26,7 +26,7 @@
 				})
 
 				$('#btnPergaminhos').click(function(){
-					$('#msg_erro').hide();
+					$('#msg').hide();
 
 					$.ajax({
 						url: '/pergaminhos',
@@ -59,9 +59,14 @@
 
 	    <div class="container">
 
-			<% if(comando_invalido == 'S') { %>
-				<div class="alert alert-danger" id="msg_erro">
+			<% if(msg == 'A') { %>
+				<div class="alert alert-danger" id="msg">
 					<strong>Erro no formulário</strong>
+				</div>
+			<% } %>
+			<% if(msg == 'B') { %>
+				<div class="alert alert-info" id="msg">
+					<strong>Ação executada com sucesso!</strong>
 				</div>
 			<% } %>
 	    	
