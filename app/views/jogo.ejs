@@ -32,11 +32,24 @@
 						url: '/pergaminhos',
 						method: 'get',
 						success: function(data){
+							clearInterval(timerID);
 							$('#acoes').html(data);
+							timerID = setInterval('cronometro()', 1000);
 						}
 					})
 				})
-			})
+			})		
+			
+			var timerID = null;
+
+			function cronometro(){
+				$('.tempo_restante').each(function(){
+					var segundos = $(this).html();
+					var segundos_atuais = parseInt(segundos) - 1;
+					$(this).html(segundos_atuais);					
+				})
+			}
+			
 		</script>
 
 		<!-- bootstrap - link cdn -->

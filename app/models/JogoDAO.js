@@ -74,7 +74,9 @@ JogoDAO.prototype.getAcoes = function(usuario, res){
       
         const db = client.db('got');
       
-        db.collection('acoes').find(usuario).toArray(function(err, result){
+        var date = new Date();
+        var momento_atual = date.getTime();
+        db.collection('acoes').find({usuario: usuario, acao_termina_em: {$gt: momento_atual}}).toArray(function(err, result){
             res.render('pergaminhos', {acoes: result});
         });
         
