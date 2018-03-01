@@ -50,10 +50,10 @@ JogoDAO.prototype.acao = function(acao){
         var tempo = null;
 
         switch(parseInt(acao.acao)){
-            case 1: tempo * 60 * 60000; break;
-            case 2: tempo * 60 * 60000; break;
-            case 3: tempo * 60 * 60000; break;
-            case 4: tempo * 60 * 60000; break;
+            case 1: tempo = 1 * 60 * 60000; break;
+            case 2: tempo = 2 * 60 * 60000; break;
+            case 3: tempo = 5 * 60 * 60000; break;
+            case 4: tempo = 5 * 60 * 60000; break;
         }
 
         acao.acao_termina_em = date.getTime() + tempo;
