@@ -48,12 +48,25 @@ JogoDAO.prototype.acao = function(acao){
         var date = new Date();
 
         var tempo = null;
+        var moedas = null;
 
         switch(parseInt(acao.acao)){
-            case 1: tempo = 1 * 60 * 60000; break;
-            case 2: tempo = 2 * 60 * 60000; break;
-            case 3: tempo = 5 * 60 * 60000; break;
-            case 4: tempo = 5 * 60 * 60000; break;
+            case 1: 
+                tempo = 1 * 60000;
+                moedas = -2 * acao.quantidade; 
+                break;
+            case 2: 
+                tempo = 2 * 60000; 
+                moedas = -3 * acao.quantidade
+                break;
+            case 3: 
+                tempo = 5 * 60000; 
+                moedas = -1 * acao.quantidade;
+                break;
+            case 4: 
+                tempo = 5 * 60000; 
+                moedas = -1 * acao.quantidade;
+                break;
         }
 
         acao.acao_termina_em = date.getTime() + tempo;
@@ -61,9 +74,13 @@ JogoDAO.prototype.acao = function(acao){
         db.collection('acoes').insertOne(acao, function(err, r) {
             assert.equal(null, err);
             assert.equal(1, r.insertedCount);
-            client.close();
         });
         
+        db.collection('jogo').update(
+            {usuario: acao.usuario},
+            {$inc: {moeda: moedas}}
+        );
+            
         client.close();
     }); 
 }
