@@ -66,3 +66,12 @@ module.exports.ordenar_acao_sudito = function(application, req, res){
     JogoDAO.acao(dadosForm);
     res.redirect('jogo?msg=B');
 }
+
+module.exports.revogar_acao = function(application, req, res){
+    var url_query = req.query;
+    
+    var JogoDAO = new application.app.models.JogoDAO();
+    var _id = url_query.id_acao;
+    console.log(_id);
+    JogoDAO.revogar_acao(_id, res);
+}

@@ -1,5 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
+const ObjectID = require('mongodb').ObjectID;
 
 function JogoDAO(){}
 
@@ -97,6 +98,22 @@ JogoDAO.prototype.getAcoes = function(usuario, res){
             res.render('pergaminhos', {acoes: result});
         });
         
+        client.close();
+    });
+}
+
+JogoDAO.prototype.revogar_acao = function(_id, res){
+    MongoClient.connect('mongodb://localhost:27017', function(err, client) {
+        assert.equal(null, err);
+      
+        const db = client.db('got');
+      
+        db.collection('acoes').remove(
+            {_id: ObjectID(_id)},
+            function(err, result){
+                res.redirect('jogo?msg=D');
+            }
+        );
         client.close();
     });
 }
