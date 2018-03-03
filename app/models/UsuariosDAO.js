@@ -26,7 +26,6 @@ UsuariosDAO.prototype.autenticar = function(usuario, req, res){
         const db = client.db('got');
       
         db.collection('usuarios').find(usuario).toArray(function(err, result){
-            console.log(usuario);
             if(result[0] != undefined){
                 req.session.autorizado = true;
                 req.session.usuario = result[0].usuario;
@@ -36,7 +35,9 @@ UsuariosDAO.prototype.autenticar = function(usuario, req, res){
             if(req.session.autorizado){
                 res.redirect('jogo');
             }else{
-                res.render('index', {validacao: {}});
+                var erro = [{msg:'Usuário ou senha inválido. Tente novamente.'}];
+                console.log(usuario);
+                res.render('index', {validacao: erro, usuario: usuario});
             }
         });
         
