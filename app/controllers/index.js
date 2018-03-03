@@ -17,6 +17,8 @@ module.exports.autenticar = function(application, req, res){
 
     var UsuariosDAO = new application.app.models.UsuariosDAO();
     UsuariosDAO.autenticar(dadosForm, req, res);
+}
 
-    //res.send('Tudo Ok para iniciar a sessão.');
+module.exports.cadastro = function(application, req, res){
+    res.render('cadastro');
 }
