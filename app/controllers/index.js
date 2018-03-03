@@ -18,7 +18,3 @@ module.exports.autenticar = function(application, req, res){
     var UsuariosDAO = new application.app.models.UsuariosDAO();
     UsuariosDAO.autenticar(dadosForm, req, res);
 }
-
-module.exports.cadastro = function(application, req, res){
-    res.render('cadastro');
-}

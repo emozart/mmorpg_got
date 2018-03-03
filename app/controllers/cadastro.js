@@ -23,5 +23,5 @@ module.exports.cadastrar = function(application, req, res){
     var JogoDAO = new application.app.models.JogoDAO();
     JogoDAO.gerarParamentros(dadosForm.usuario);
 
-    res.send('Formulário enviado com sucesso!');
+    res.render('cadastro_ok');
 }
